@@ -227,7 +227,7 @@
   .ov-node.food{border-color:var(--red);}
   .ov-node.sight{border-color:var(--green);}
 
-  /* ============ 导游 1g ============ */
+  /* ============ 导游 AI登（圆滚滚小猪） ============ */
   #guide{position:fixed;bottom:84px;right:14px;z-index:140;display:flex;flex-direction:column;align-items:flex-end;}
   .guide-bubble{position:relative;max-width:210px;background:#fff;color:var(--ink);border-radius:14px;padding:10px 13px;
     font-size:13px;line-height:1.5;box-shadow:0 8px 20px rgba(0,0,0,.22);margin-bottom:10px;opacity:0;transform:translateY(8px) scale(.9);
@@ -235,27 +235,27 @@
   .guide-bubble.show{opacity:1;transform:translateY(0) scale(1);}
   .guide-bubble::after{content:"";position:absolute;bottom:-7px;right:18px;border:7px solid transparent;border-top-color:#fff;border-bottom:0;}
   .guide-bubble.secret{background:linear-gradient(135deg,#fff6e6,#ffe9f2);border-color:var(--pink);font-family:var(--ht);font-size:15px;}
-  .guide-cat{position:relative;width:62px;height:62px;cursor:pointer;flex-shrink:0;animation:bob 2.6s ease-in-out infinite;transform-origin:50% 100%;}
-  .guide-cat:active{transform:scale(.9);}
-  .guide-cat.talk{animation:catTalk .45s ease;}
-  @keyframes catTalk{0%,100%{transform:rotate(0)}25%{transform:rotate(-7deg)}75%{transform:rotate(7deg)}}
+  .guide-pig{position:relative;width:64px;height:56px;cursor:pointer;flex-shrink:0;animation:bob 2.6s ease-in-out infinite;transform-origin:50% 100%;}
+  .guide-pig:active{transform:scale(.9);}
+  .guide-pig.talk{animation:pigTalk .45s ease;}
+  @keyframes pigTalk{0%,100%{transform:rotate(0)}25%{transform:rotate(-7deg)}75%{transform:rotate(7deg)}}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
   @keyframes heartUp{0%{opacity:0;transform:translateY(0) scale(.6)}25%{opacity:1}100%{opacity:0;transform:translateY(-46px) scale(1.1)}}
-  .cat-ear{position:absolute;top:2px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:19px solid #fffdf8;z-index:1;}
-  .cat-ear::after{content:"";position:absolute;left:-5px;top:8px;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid var(--pink);}
-  .cat-ear.left{left:8px;transform:rotate(-20deg);}
-  .cat-ear.right{right:8px;transform:rotate(20deg);}
-  .cat-face{position:absolute;inset:10px 3px 3px 3px;background:radial-gradient(circle at 50% 32%,#fff,#ffe7f1);border-radius:50%;
-    box-shadow:0 6px 16px rgba(236,106,156,.45), inset 0 0 0 2px #ffd0e2;overflow:hidden;}
-  .cat-eye{position:absolute;top:42%;width:7px;height:10px;background:#4a3b2a;border-radius:50%;animation:blink 4.5s infinite;}
-  .cat-eye.left{left:31%;} .cat-eye.right{right:31%;}
+  .pig-ear{position:absolute;top:1px;width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:15px solid #ff9ec2;z-index:1;}
+  .pig-ear.left{left:9px;transform:rotate(-24deg);}
+  .pig-ear.right{right:9px;transform:rotate(24deg);}
+  .pig-face{position:absolute;inset:7px 4px 2px 4px;background:radial-gradient(circle at 50% 35%,#ffd9e6,#ffb3cd);border-radius:50%;
+    box-shadow:0 6px 16px rgba(236,106,156,.4), inset 0 0 0 2px #ff9ec2;overflow:hidden;}
+  .pig-eye{position:absolute;top:40%;width:7px;height:9px;background:#5a3b46;border-radius:50%;animation:blink 4.5s infinite;}
+  .pig-eye.left{left:30%;} .pig-eye.right{right:30%;}
   @keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.12)}}
-  .cat-nose{position:absolute;top:57%;left:50%;transform:translateX(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--pink);}
-  .cat-mouth{position:absolute;top:67%;left:50%;transform:translateX(-50%);width:12px;height:6px;border:2px solid #d59ab2;border-top:none;border-radius:0 0 12px 12px;}
-  .cat-face .wk{position:absolute;top:55%;width:12px;height:1.5px;background:#c9a9b6;}
-  .cat-face .wk.l{left:3px;transform:rotate(10deg);box-shadow:0 -4px 0 #c9a9b6;}
-  .cat-face .wk.r{right:3px;transform:rotate(-10deg);box-shadow:0 -4px 0 #c9a9b6;}
-  .cat-tag{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);font-family:var(--ht);font-size:12px;color:#fff;
+  .pig-face .blush{position:absolute;top:55%;width:9px;height:5px;background:rgba(255,120,160,.4);border-radius:50%;}
+  .pig-face .blush.l{left:11%;} .pig-face .blush.r{right:11%;}
+  .pig-snout{position:absolute;top:54%;left:50%;transform:translateX(-50%);width:20px;height:14px;background:#ff8fb3;border-radius:50%;box-shadow:inset 0 0 0 1.5px #e76d96;}
+  .pig-snout::before,.pig-snout::after{content:"";position:absolute;top:50%;width:3px;height:5px;background:#b34a6e;border-radius:50%;transform:translateY(-50%);}
+  .pig-snout::before{left:5px;} .pig-snout::after{right:5px;}
+  .pig-mouth{position:absolute;top:74%;left:50%;transform:translateX(-50%);width:10px;height:5px;border:2px solid #d56b8e;border-top:none;border-radius:0 0 10px 10px;}
+  .pig-tag{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);font-family:var(--ht);font-size:12px;color:#fff;
     background:var(--pink);padding:0 7px;border-radius:8px;box-shadow:0 2px 5px rgba(236,106,156,.4);white-space:nowrap;}
 
   @media (max-width:480px){
@@ -279,7 +279,7 @@
         <span class="seal">潮汕 · 食游</span>
         <h1>汕头手账</h1>
         <div class="date">8.22 – 8.23 周末</div>
-        <div class="who">子乐 &amp; 1g 的美食漫游</div>
+        <div class="who">子乐 &amp; AI登 的美食漫游</div>
       </div>
     </div>
   </div>
@@ -402,20 +402,21 @@
   </div>
 </div>
 
-<!-- 导游 1g（圆滚滚小猫咪） -->
+<!-- 导游 AI登（圆滚滚小猪） -->
 <div id="guide">
   <div class="guide-bubble" id="guideBubble"></div>
-  <div class="guide-cat" id="guideBtn" role="button" aria-label="导游 1g">
-    <div class="cat-ear left"></div>
-    <div class="cat-ear right"></div>
-    <div class="cat-face">
-      <div class="cat-eye left"></div>
-      <div class="cat-eye right"></div>
-      <div class="cat-nose"></div>
-      <div class="cat-mouth"></div>
-      <i class="wk l"></i><i class="wk r"></i>
+  <div class="guide-pig" id="guideBtn" role="button" aria-label="导游 AI登">
+    <div class="pig-ear left"></div>
+    <div class="pig-ear right"></div>
+    <div class="pig-face">
+      <div class="pig-eye left"></div>
+      <div class="pig-eye right"></div>
+      <span class="blush l"></span>
+      <span class="blush r"></span>
+      <div class="pig-snout"></div>
+      <div class="pig-mouth"></div>
     </div>
-    <span class="cat-tag">1g</span>
+    <span class="pig-tag">AI登</span>
   </div>
 </div>
 
@@ -493,7 +494,7 @@ const FOODS=[
   {id:'f10',cat:'甜品',em:'🍡',nm:'鸭母捻',local:true,sh:'潮汕甜汤，糯米汤圆配绿豆、红豆、鹌鹑蛋。',more:'广场老牌豆花甜汤（公园路）'},
   {id:'f11',cat:'甜品',em:'🍮',nm:'豆花 / 草粿',sh:'豆花香甜、草粿清凉，加红糖绝配。',more:'路边推车最香'},
   {id:'f12',cat:'甜品',em:'🍧',nm:'清心丸 / 绿豆爽',sh:'夏日甜汤，爽口解腻。',more:'吃完火锅来一碗'},
-  {id:'f13',cat:'手信',em:'🍊',nm:'老香黄',local:true,sh:'佛手果蜜饯，潮汕三宝之一，泡水喝养胃。',more:'带回家送长辈（1g 点名要带一罐）'},
+  {id:'f13',cat:'手信',em:'🍊',nm:'老香黄',local:true,sh:'佛手果蜜饯，潮汕三宝之一，泡水喝养胃。',more:'带回家送长辈（AI登 点名要带一罐）'},
   {id:'f14',cat:'手信',em:'🥩',nm:'手打牛肉丸（真空）',local:true,sh:'真空带走，回家煮汤、打火锅。',more:'龙北南兴丸店（非遗手打）/ 福合埕'},
   {id:'f15',cat:'手信',em:'🍵',nm:'凤凰单丛茶',sh:'工夫茶标配，蜜兰香 / 鸭屎香都经典。',more:'伴手礼天花板'}
 ];
@@ -519,7 +520,7 @@ const TIMELINE={
 const TL_FLAT=[];
 for(const day in TIMELINE){ TIMELINE[day].forEach(it=>TL_FLAT.push({day,it})); }
 
-/* ---------- 导游 1g 彩蛋 ---------- */
+/* ---------- 导游 AI登 彩蛋 ---------- */
 const GUIDE_LINES=[
   "子乐，这份手账做得还行嘛 😏 有我一半功劳？",
   "记得多拍点照，我要看！📸 小公园骑楼超上镜。",
@@ -757,7 +758,7 @@ function closeOverview(){document.getElementById('ov').classList.remove('show');
   })();
 })();
 
-/* ---------- 导游 1g（圆滚滚小猫咪） ---------- */
+/* ---------- 导游 AI登（圆滚滚小猪） ---------- */
 (function(){
   const btn=document.getElementById('guideBtn'), bubble=document.getElementById('guideBubble');
   let hideT, taps=[], lastTap=0, singleT, lastInteract=Date.now();
@@ -784,7 +785,7 @@ function closeOverview(){document.getElementById('ov').classList.remove('show');
     document.getElementById('guide').appendChild(h);
     setTimeout(()=>h.remove(),1000);
   }
-  function purr(){ taps=[]; say("喵～被你摸头好舒服 😺💕"); spawnHeart(); }
+  function purr(){ taps=[]; say("哼～被你摸头好舒服 🐷💕"); spawnHeart(); }
   function onTap(){
     const now=Date.now();
     taps.push(now); taps=taps.filter(t=>now-t<4000);
@@ -794,9 +795,9 @@ function closeOverview(){document.getElementById('ov').classList.remove('show');
     singleT=setTimeout(()=>{ say(pick()); },320);
   }
   btn.addEventListener('click',onTap);
-  btn.addEventListener('animationend',e=>{ if(e.animationName==='catTalk') btn.classList.remove('talk'); });
+  btn.addEventListener('animationend',e=>{ if(e.animationName==='pigTalk') btn.classList.remove('talk'); });
   window.__guideCheer=()=>{ if(!bubble.classList.contains('show')) say("打卡成功！又解锁一站 🎉 离集齐更近啦"); };
-  window.__guideIntro=()=>{ say("我是 1g 喵～ 你的旅行搭子，戳我有惊喜 👀"); };
+  window.__guideIntro=()=>{ say("我是 AI登 哼～ 你的旅行搭子，戳我有惊喜 👀"); };
   setInterval(()=>{ if(Date.now()-lastInteract>16000) say(pick()); },9000);
 })();
 
