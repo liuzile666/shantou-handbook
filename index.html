@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>汕头周末手账 · 美食漫游 8.22–8.23</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#fbf3e4;
+    --paper2:#f6e8cf;
+    --ink:#4a3b2a;
+    --ink-soft:#7a6750;
+    --red:#e0584b;       /* 涨/重点 红 */
+    --green:#5aa469;     /* 景点 绿 */
+    --blue:#4a86c5;      /* 酒店/交通 蓝 */
+    --orange:#ef8b3c;
+    --tape:rgba(224,88,75,.55);
+    --shadow:0 6px 18px rgba(120,90,50,.18);
+    --hw:"ZCOOL KuaiLe","PingFang SC","Microsoft YaHei",sans-serif;
+    --ht:"Ma Shan Zheng","ZCOOL KuaiLe",cursive;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--hw);
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 20% 12%, #fff7ea 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, #fdeccd 0%, transparent 50%),
+      #e9dcc2;
+    min-height:100vh;
+    display:flex;justify-content:center;align-items:flex-start;
+    padding:18px 10px 40px;
+  }
+  /* 手机外框 */
+  .phone{
+    position:relative;width:100%;max-width:420px;
+    background:var(--paper);
+    border-radius:34px;
+    box-shadow:var(--shadow), 0 0 0 10px #2c2418, 0 0 0 12px #4a3b2a;
+    overflow:hidden;
+    min-height:760px;
+    display:flex;flex-direction:column;
+  }
+  /* 刘海 */
+  .notch{
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:150px;height:26px;background:#2c2418;border-radius:0 0 16px 16px;z-index:60;
+  }
+  .screen{flex:1;overflow-y:auto;overflow-x:hidden;padding:34px 16px 78px;-webkit-overflow-scrolling:touch;}
+  .screen::-webkit-scrollbar{width:0;}
+
+  /* 封面 banner */
+  .cover{
+    position:relative;background:linear-gradient(135deg,#f7d9a8,#f3c089);
+    border-radius:20px;padding:18px 16px 16px;color:#5a3b1f;
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .cover::after{content:"";position:absolute;right:-20px;top:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.25);}
+  .cover h1{font-family:var(--ht);font-size:30px;margin:0 0 4px;letter-spacing:1px;}
+  .cover .sub{font-size:14px;opacity:.85;margin-bottom:12px;}
+  .train-chips{display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{background:rgba(255,255,255,.7);border-radius:12px;padding:7px 10px;font-size:12.5px;line-height:1.3;box-shadow:0 2px 6px rgba(0,0,0,.06);}
+  .chip b{display:block;font-size:13.5px;color:var(--red);}
+  .washi{position:absolute;width:78px;height:22px;background:var(--tape);transform:rotate(-12deg);top:10px;left:-14px;opacity:.8;border-radius:2px;}
+
+  h2.sec{font-family:var(--ht);font-size:23px;margin:22px 4px 12px;display:flex;align-items:center;gap:8px;}
+  h2.sec .dot{width:10px;height:10px;border-radius:50%;background:var(--red);}
+
+  /* 时间线 */
+  .day-card{background:var(--paper2);border-radius:16px;padding:6px 6px 4px;margin-bottom:14px;box-shadow:0 3px 10px rgba(120,90,50,.12);}
+  .day-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;cursor:pointer;}
+  .day-head .d{font-family:var(--ht);font-size:20px;}
+  .day-head .meta{font-size:12px;color:var(--ink-soft);}
+  .tl-item{border-left:3px dashed var(--orange);margin:4px 0 4px 18px;padding:8px 10px 8px 14px;position:relative;}
+  .tl-item .ico{position:absolute;left:-26px;top:8px;width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 5px rgba(0,0,0,.12);}
+  .tl-item .t{font-size:14.5px;font-weight:bold;}
+  .tl-item .d{font-size:12.5px;color:var(--ink-soft);margin-top:2px;line-height:1.5;}
+  .tl-item .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:8px;margin-top:5px;background:rgba(224,88,75,.14);color:var(--red);}
+
+  /* 地图 */
+  .map-wrap{position:relative;width:100%;aspect-ratio:340/540;background:#cfeaf2;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);}
+  .map-wrap svg{position:absolute;inset:0;width:100%;height:100%;}
+  .pin{position:absolute;transform:translate(-50%,-100%);border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;z-index:5;}
+  .pin .ball{width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 7px rgba(0,0,0,.25);border:2px solid #fff;}
+  .pin .ball span{transform:rotate(45deg);font-size:15px;}
+  .pin .lbl{margin-top:4px;font-size:10.5px;background:rgba(255,255,255,.85);padding:1px 5px;border-radius:6px;white-space:nowrap;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12);}
+  .pin.hotel .ball{background:var(--blue);}
+  .pin.food .ball{background:var(--red);}
+  .pin.sight .ball{background:var(--green);}
+  .pin.done .ball{outline:3px solid var(--green);outline-offset:1px;}
+  .pin.done .lbl::after{content:" ✓";color:var(--green);font-weight:bold;}
+  .map-legend{display:flex;gap:12px;justify-content:center;font-size:11.5px;margin-top:10px;color:var(--ink-soft);}
+  .map-legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:4px;vertical-align:-1px;}
+
+  /* 底部弹层 */
+  .mask{position:fixed;inset:0;background:rgba(40,30,18,.45);z-index:80;display:none;}
+  .mask.show{display:block;}
+  .sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,100%);width:100%;max-width:420px;background:var(--paper);border-radius:24px 24px 0 0;padding:18px 18px 26px;z-index:90;transition:transform .28s cubic-bezier(.2,.9,.3,1);box-shadow:0 -8px 24px rgba(0,0,0,.2);}
+  .sheet.show{transform:translate(-50%,0);}
+  .sheet .grab{width:42px;height:5px;background:#d8c4a3;border-radius:3px;margin:0 auto 12px;}
+  .sheet h3{font-family:var(--ht);font-size:24px;margin:0 0 2px;display:flex;align-items:center;gap:8px;}
+  .sheet .stype{font-size:12px;color:#fff;padding:2px 9px;border-radius:9px;margin-bottom:8px;display:inline-block;}
+  .sheet p{font-size:13.5px;line-height:1.65;margin:8px 0;color:var(--ink);}
+  .sheet .hl{background:rgba(239,139,60,.18);border-left:3px solid var(--orange);padding:6px 10px;border-radius:0 8px 8px 0;margin:8px 0;font-size:13px;}
+  .sheet .acts{display:flex;gap:10px;margin-top:14px;}
+  .btn{flex:1;border:none;border-radius:14px;padding:12px;font-family:var(--hw);font-size:15px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.12);}
+  .btn.primary{background:var(--green);color:#fff;}
+  .btn.primary.done{background:#c9bca6;color:#5a4a36;}
+  .btn.ghost{background:#fff;color:var(--ink);border:1.5px solid #e0cfa9;}
+
+  /* 美食卡 */
+  .cat-title{font-family:var(--ht);font-size:19px;margin:16px 6px 8px;color:var(--orange);}
+  .food-card{background:var(--paper2);border-radius:14px;padding:11px 13px;margin-bottom:10px;box-shadow:0 2px 7px rgba(120,90,50,.1);display:flex;gap:10px;align-items:flex-start;cursor:pointer;}
+  .food-card .em{font-size:26px;flex-shrink:0;}
+  .food-card .body{flex:1;}
+  .food-card .nm{font-size:15.5px;font-weight:bold;}
+  .food-card .sh{font-size:12px;color:var(--ink-soft);margin-top:2px;line-height:1.5;}
+  .food-card .more{font-size:12px;color:var(--blue);margin-top:4px;}
+  .food-card .wish{font-size:12px;padding:3px 9px;border-radius:10px;background:rgba(224,88,75,.13);color:var(--red);white-space:nowrap;align-self:center;}
+  .food-card .wish.on{background:var(--red);color:#fff;}
+
+  /* 我的 */
+  .ring-wrap{display:flex;align-items:center;gap:16px;background:var(--paper2);border-radius:16px;padding:16px;box-shadow:0 3px 10px rgba(120,90,50,.12);}
+  .ring{--p:0;width:84px;height:84px;border-radius:50%;background:conic-gradient(var(--green) calc(var(--p)*1%), #e6d8bd 0);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .ring .inner{width:64px;height:64px;border-radius:50%;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .ring .inner b{font-size:20px;font-family:var(--ht);color:var(--green);line-height:1;}
+  .ring .inner small{font-size:10px;color:var(--ink-soft);}
+  .ring-info .big{font-size:15px;font-weight:bold;}
+  .ring-info .sm{font-size:12px;color:var(--ink-soft);margin-top:3px;}
+  .tools{display:flex;gap:10px;margin:14px 0;}
+  .tools .btn{font-size:14px;padding:11px;}
+  .notes-box{width:100%;min-height:120px;border:1.5px dashed #d8c4a3;border-radius:14px;background:#fffdf7;padding:12px;font-family:var(--hw);font-size:14px;color:var(--ink);resize:vertical;}
+  .notes-box:focus{outline:none;border-color:var(--orange);}
+  .checked-list{margin-top:6px;}
+  .checked-list .ci{display:flex;align-items:center;gap:8px;font-size:13.5px;padding:7px 0;border-bottom:1px dashed #e3d3b6;}
+  .checked-list .ci .x{color:var(--green);font-weight:bold;}
+
+  /* 底部 tab */
+  .tabbar{position:absolute;bottom:0;left:0;right:0;height:64px;background:#fffaf0;border-top:1px solid #e7d6b6;display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom);}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--ink-soft);font-size:11px;cursor:pointer;border:none;background:none;font-family:var(--hw);}
+  .tab .ic{font-size:20px;transition:transform .15s;}
+  .tab.active{color:var(--red);}
+  .tab.active .ic{transform:scale(1.18);}
+
+  .hidden{display:none !important;}
+  .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#4a3b2a;color:#fff;padding:10px 18px;border-radius:20px;font-size:13.5px;z-index:120;opacity:0;transition:.25s;pointer-events:none;max-width:80%;text-align:center;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:480px){
+    body{padding:0;background:var(--paper);}
+    .phone{max-width:none;border-radius:0;box-shadow:none;min-height:100vh;}
+    .notch{display:none;}
+    .screen{padding-bottom:84px;}
+  }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="notch"></div>
+
+  <!-- 行程 -->
+  <div class="screen" id="screen-trip">
+    <div class="cover">
+      <div class="washi"></div>
+      <h1>汕头周末手账</h1>
+      <div class="sub">美食漫游 · 2026.8.22 – 8.23（周六→周日）</div>
+      <div class="train-chips">
+        <div class="chip"><b>去程 8/22 周六</b>深圳北 08:29 → 汕头 10:45 🚄</div>
+        <div class="chip"><b>返程 8/23 周日</b>汕头 21:15 → 深圳北 23:14 🚄</div>
+      </div>
+    </div>
+
+    <h2 class="sec"><span class="dot"></span>行程时间线</h2>
+    <div id="timeline"></div>
+
+    <h2 class="sec"><span class="dot"></span>住宿</h2>
+    <div class="day-card">
+      <div class="tl-item" style="border-color:var(--blue)">
+        <div class="ico">🏨</div>
+        <div class="t">桔子水晶酒店（新一城黄河路店）</div>
+        <div class="d">龙湖区黄河路·新一城旁，22号晚入住，23号晚赶 21:15 车。<br>出门即龙湖美食圈，八合里海记步行可达。</div>
+        <span class="tag">放行李 / 充电 / 中转站</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin-top:6px;">👇 切到底部「地图」开始打卡，或「美食」列想吃清单</p>
+  </div>
+
+  <!-- 地图 -->
+  <div class="screen hidden" id="screen-map">
+    <h2 class="sec"><span class="dot"></span>汕头漫游地图</h2>
+    <div class="map-wrap" id="map"></div>
+    <div class="map-legend">
+      <span><i style="background:var(--blue)"></i>住宿</span>
+      <span><i style="background:var(--red)"></i>美食</span>
+      <span><i style="background:var(--green)"></i>景点</span>
+    </div>
+    <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin-top:10px;">点地图上的小图钉，看详情并打卡 ✅</p>
+  </div>
+
+  <!-- 美食 -->
+  <div class="screen hidden" id="screen-food">
+    <h2 class="sec"><span class="dot"></span>潮汕美食清单</h2>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:-4px 6px 4px;">点卡片看详情，标「想吃」攒进「我的」心愿单 🍜</p>
+    <div id="foodlist"></div>
+  </div>
+
+  <!-- 我的 -->
+  <div class="screen hidden" id="screen-me">
+    <h2 class="sec"><span class="dot"></span>我的手账</h2>
+    <div class="ring-wrap">
+      <div class="ring" id="ring"><div class="inner"><b id="ringNum">0</b><small>已打卡</small></div></div>
+      <div class="ring-info">
+        <div class="big" id="ringText">还没出发，冲鸭！</div>
+        <div class="sm" id="ringSub">10 个地点等你点亮</div>
+      </div>
+    </div>
+
+    <div class="tools">
+      <button class="btn primary" onclick="rollFood()">🎲 今天吃啥</button>
+      <button class="btn ghost" onclick="copyTrip()">📋 复制行程</button>
+    </div>
+
+    <h2 class="sec" style="font-size:18px;"><span class="dot"></span>打卡记录</h2>
+    <div class="checked-list" id="checkedList"></div>
+
+    <h2 class="sec" style="font-size:18px;"><span class="dot"></span>旅行小记</h2>
+    <textarea class="notes-box" id="notes" placeholder="记下今天的味道和心情…（自动保存在本机）"></textarea>
+  </div>
+
+  <!-- tabbar -->
+  <div class="tabbar">
+    <button class="tab active" data-tab="trip" onclick="switchTab('trip')"><span class="ic">🗓️</span>行程</button>
+    <button class="tab" data-tab="map" onclick="switchTab('map')"><span class="ic">🗺️</span>地图</button>
+    <button class="tab" data-tab="food" onclick="switchTab('food')"><span class="ic">🍜</span>美食</button>
+    <button class="tab" data-tab="me" onclick="switchTab('me')"><span class="ic">📌</span>我的</button>
+  </div>
+</div>
+
+<div class="mask" id="mask" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+  <div class="grab"></div>
+  <h3 id="shName"></h3>
+  <span class="stype" id="shType"></span>
+  <p id="shDesc"></p>
+  <div class="hl" id="shEat"></div>
+  <div class="hl" id="shTip" style="background:rgba(90,164,105,.16);border-color:var(--green);"></div>
+  <div class="acts">
+    <button class="btn ghost" onclick="closeSheet()">关闭</button>
+    <button class="btn primary" id="shCheck" onclick="toggleCheckFromSheet()">打卡 ✅</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- 数据 ---------- */
+const PLACES = [
+  {id:'hotel', name:'桔子水晶酒店', type:'hotel', x:268,y:198, emoji:'🏨',
+   desc:'你的汕头据点。龙湖区黄河路新一城旁，22号晚入住，23号晚赶 21:15 的返程车。',
+   eat:'楼下新一城商场有餐饮，步行可达八合里海记龙湖店。', tip:'放行李、充电、中转都靠它，出发前记得退好房。'},
+  {id:'xiaogongyuan', name:'小公园亭', type:'sight', x:62,y:172, emoji:'🏛️',
+   desc:'汕头开埠地标，国内保存最完整的放射状骑楼老街，拍照超出片。',
+   eat:'周边老字号小吃云集：肠粉、蚝烙、甜汤随手可吃。', tip:'早上去人少凉快，傍晚灯光亮起最有味道。'},
+  {id:'laomagong', name:'老妈宫戏台', type:'sight', x:84,y:212, emoji:'🎭',
+   desc:'妈祖庙 + 戏台，感受潮汕人的信仰与民俗，常有潮剧惠民演出。',
+   eat:'紧挨小公园，顺路吃完再逛。', tip:'留意门口演出时间表，碰上了别错过。'},
+  {id:'xiti', name:'西堤公园', type:'sight', x:54,y:300, emoji:'🌅',
+   desc:'侨批纪念地，海滨木栈道看礐石大桥与落日，城市浪漫担当。',
+   eat:'附近有老牌甜汤、豆浆油条作早点。', tip:'傍晚来吹海风看日落，记得防蚊。'},
+  {id:'shipotai', name:'石炮台公园', type:'sight', x:132,y:338, emoji:'🏰',
+   desc:'清代崎碌炮台，国内罕见环形城堡炮台，可下到炮巷里穿行。',
+   eat:'周边居民区藏着肠粉、粿条老店。', tip:'历史感强又遮阴，午后避晒好去处。'},
+  {id:'kaitie', name:'开埠文化陈列馆', type:'sight', x:96,y:190, emoji:'📜',
+   desc:'还原汕头从渔村到商埠的百年故事，小公园片区的文化入口。',
+   eat:'看完出门就是骑楼美食街。', tip:'免费，半小时能逛完，配小公园一起。'},
+  {id:'longyan', name:'龙眼南路美食街', type:'food', x:150,y:232, emoji:'🍢',
+   desc:'本地人夜宵天堂，一条街肠粉、蚝烙、鸭母捻、粿品通通有。',
+   eat:'肠粉、蚝烙、鸭母捻甜汤、无米粿，晚上最热闹。', tip:'留肚子晚上来，边走边吃最爽。'},
+  {id:'baheli', name:'八合里海记', type:'food', x:286,y:238, emoji:'🥩',
+   desc:'潮汕牛肉火锅名店，现切吊龙、五花趾、匙柄，手打牛肉丸弹到爆。',
+   eat:'牛肉火锅 + 牛肉丸 + 沙茶酱，清汤涮 8 秒。', tip:'饭点必排队，11 点前或 14 点后错峰去。'},
+  {id:'zhupan', name:'长平路·珠江路夜粥', type:'food', x:258,y:292, emoji:'🍲',
+   desc:'潮汕夜粥大本营，生滚砂锅粥、生腌、卤水一应俱全。',
+   eat:'膏蟹砂锅粥、生腌虾蟹、卤鹅，越夜越精彩。', tip:'潮汕夜生活，20 点后才热闹，别太早去。'},
+  {id:'nanao', name:'南澳岛', type:'sight', x:300,y:82, emoji:'🏝️',
+   desc:'广东唯一海岛县，环岛公路 + 风车 + 北回归线广场，海景拉满。',
+   eat:'岛上海鲜大排档、紫菜炒饭。', tip:'较远，建议包车/一日游，留大半天，注意末班船/桥。'}
+];
+const TYPE_TXT={hotel:'住宿',food:'美食',sight:'景点'};
+const TYPE_COL={hotel:'#4a86c5',food:'#e0584b',sight:'#5aa469'};
+
+const FOODS=[
+  {id:'f1',cat:'正餐',em:'🥩',nm:'潮汕牛肉火锅',sh:'清汤涮8秒，吊龙/五花趾/匙柄/胸口朥 + 手打牛肉丸，蘸沙茶酱。',more:'推荐：八合里海记 / 福合埕'},
+  {id:'f2',cat:'正餐',em:'🍲',nm:'潮汕砂锅粥',sh:'生滚膏蟹 / 虾 / 蚝粥，米水交融、绵密鲜甜。',more:'推荐：长平路 · 珠江路夜粥'},
+  {id:'f3',cat:'正餐',em:'🦢',nm:'卤鹅（狮头鹅）',sh:'澄海狮头鹅，卤水鹅肉、鹅翅、鹅肝，咸香入味。',more:'配粿条或白饭一绝'},
+  {id:'f4',cat:'正餐',em:'🦐',nm:'生腌',sh:'潮汕"毒药"，生腌虾蟹膏，鲜到上头（肠胃弱慎试）。',more:'夜粥摊必点'},
+  {id:'f5',cat:'小吃',em:'🍤',nm:'潮汕肠粉',sh:'抽屉式米皮薄，猪肉/牛肉/虾仁，淋花生酱 + 酱油。',more:'早餐/夜宵都行'},
+  {id:'f6',cat:'小吃',em:'🦪',nm:'蚝烙',sh:'鲜蚝 + 地瓜粉 + 蛋，外脆内嫩，配鱼露。',more:'龙眼南路一条街'},
+  {id:'f7',cat:'小吃',em:'🍜',nm:'粿条汤 / 粿汁',sh:'早餐灵魂，粿条汤清鲜，粿汁卤香浓。',more:'街头随便一家都稳'},
+  {id:'f8',cat:'小吃',em:'🟢',nm:'无米粿 / 韭菜粿 / 红桃粿',sh:'潮汕粿家族，煎、炸、蒸皆宜，寓意好。',more:'逢节必有'},
+  {id:'f9',cat:'小吃',em:'🥟',nm:'鲎粿',sh:'潮阳特色，米浆果 + 虾/肉，淋甜酱辣酱。',more:'潮阳老店更地道'},
+  {id:'f10',cat:'甜品',em:'🍡',nm:'鸭母捻',sh:'潮汕甜汤，糯米汤圆配绿豆、红豆、鹌鹑蛋。',more:'西堤/龙眼南都有'},
+  {id:'f11',cat:'甜品',em:'🍮',nm:'豆花 / 草粿',sh:'豆花香甜、草粿清凉，加红糖绝配。',more:'路边推车最香'},
+  {id:'f12',cat:'甜品',em:'🍧',nm:'清心丸 / 绿豆爽',sh:'夏日甜汤，爽口解腻。',more:'吃完火锅来一碗'},
+  {id:'f13',cat:'手信',em:'🍊',nm:'老香黄',sh:'佛手果蜜饯，潮汕三宝之一，泡水喝养胃。',more:'带回家送长辈'},
+  {id:'f14',cat:'手信',em:'🥩',nm:'手打牛肉丸（真空）',sh:'真空带走，回家煮汤、打火锅。',more:'八合里可买'},
+  {id:'f15',cat:'手信',em:'🍵',nm:'凤凰单丛茶',sh:'工夫茶标配，蜜兰香 / 鸭屎香都经典。',more:'伴手礼天花板'}
+];
+
+const TIMELINE={
+ '8/22 周六':[
+   {ico:'🚄',t:'08:29 深圳北出发',d:'坐高铁去汕头，车上补个觉，4 小时左右。'},
+   {ico:'🎉',t:'10:45 抵达汕头站',d:'出站打车/公交去新一城，先到酒店放行李、充电。',tag:'到站'},
+   {ico:'🍜',t:'中午 老城觅食',d:'小公园周边吃肠粉、蚝烙，开启潮汕胃。'},
+   {ico:'📸',t:'下午 小公园骑楼 → 开埠陈列馆 → 老妈宫戏台',d:'拍照 + 看百年商埠故事，顺路喝杯工夫茶。'},
+   {ico:'🌅',t:'傍晚 西堤公园看日落',d:'海滨木栈道吹海风，看礐石大桥，浪漫收尾。'},
+   {ico:'🌃',t:'晚上 龙眼南路美食街夜宵',d:'鸭母捻、甜汤、无米粿，边走边吃回酒店。'}
+ ],
+ '8/23 周日':[
+   {ico:'🍳',t:'早上 酒店附近早餐',d:'粿条汤 / 肠粉，填饱肚子再出发。'},
+   {ico:'🥩',t:'上午 八合里海记牛肉火锅',d:'错峰吃顿好的（或包车去南澳岛一日游）。',tag:'二选一'},
+   {ico:'🏰',t:'下午 石炮台公园 → 长平路逛吃',d:'炮台里穿行避暑，长平路扫街。'},
+   {ico:'🍲',t:'傍晚 珠江路夜粥 / 卤鹅',d:'返程前再补一顿，生腌卤鹅安排上。'},
+   {ico:'🚄',t:'21:15 汕头站返深',d:'提前到站，留时间安检。',tag:'别迟到'},
+   {ico:'🏠',t:'23:14 抵达深圳北',d:'周末圆满收工，回家睡觉。'}
+ ]
+};
+
+/* ---------- 本地存储 ---------- */
+const LS={
+  checked:new Set(JSON.parse(localStorage.getItem('st_checked')||'[]')),
+  wish:new Set(JSON.parse(localStorage.getItem('st_wish')||'[]')),
+  notes:localStorage.getItem('st_notes')||''
+};
+function save(){
+  localStorage.setItem('st_checked',JSON.stringify([...LS.checked]));
+  localStorage.setItem('st_wish',JSON.stringify([...LS.wish]));
+  localStorage.setItem('st_notes',LS.notes);
+}
+
+/* ---------- 渲染：时间线 ---------- */
+function renderTimeline(){
+  const box=document.getElementById('timeline');
+  let html='';
+  for(const day in TIMELINE){
+    html+=`<div class="day-card"><div class="day-head" onclick="this.parentElement.querySelector('.day-body').classList.toggle('hidden')">
+      <span class="d">${day}</span><span class="meta">点击展开/收起 ▾</span></div><div class="day-body">`;
+    TIMELINE[day].forEach(it=>{
+      html+=`<div class="tl-item"><div class="ico">${it.ico}</div>
+        <div class="t">${it.t}</div><div class="d">${it.d}</div>
+        ${it.tag?`<span class="tag">${it.tag}</span>`:''}</div>`;
+    });
+    html+='</div></div>';
+  }
+  box.innerHTML=html;
+}
+
+/* ---------- 渲染：地图 ---------- */
+function renderMap(){
+  const map=document.getElementById('map');
+  // 插画底图 SVG
+  const svg=`
+  <svg viewBox="0 0 340 540" preserveAspectRatio="xMidYMid slice">
+    <rect width="340" height="540" fill="#cfeaf2"/>
+    <!-- 海浪 -->
+    <g stroke="#a9d8e6" stroke-width="2" fill="none" opacity=".7">
+      <path d="M0 500 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+      <path d="M0 515 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0"/>
+    </g>
+    <!-- 南澳岛 -->
+    <ellipse cx="300" cy="82" rx="44" ry="30" fill="#bfe0a8" stroke="#8fc278" stroke-width="2"/>
+    <text x="300" y="86" font-size="11" text-anchor="middle" fill="#4a6b3a" font-family="ZCOOL KuaiLe">南澳</text>
+    <!-- 主陆地 -->
+    <path d="M0 60 Q60 40 130 70 Q210 95 300 70 L340 120 L340 540 L0 540 Z"
+          fill="#f3e7c9" stroke="#e3cfa3" stroke-width="2"/>
+    <!-- 海岸线装饰 -->
+    <path d="M0 500 Q60 480 120 495 T240 490 T340 500" stroke="#a9d8e6" stroke-width="3" fill="none"/>
+    <!-- 榕江 -->
+    <path d="M150 0 Q140 120 175 240 Q200 340 230 470" stroke="#9ed0e0" stroke-width="6" fill="none" opacity=".8"/>
+    <!-- 道路虚线 -->
+    <g stroke="#d9b98a" stroke-width="2.5" stroke-dasharray="6 6" fill="none" opacity=".8">
+      <path d="M62 172 L150 232 L286 238"/>
+      <path d="M84 212 L54 300"/>
+      <path d="M150 232 L132 338 L258 292"/>
+      <path d="M268 198 L300 82"/>
+    </g>
+    <text x="22" y="40" font-size="13" fill="#b88a4a" font-family="Ma Shan Zheng">汕 头 湾</text>
+  </svg>`;
+  map.innerHTML=svg;
+  PLACES.forEach(p=>{
+    const b=document.createElement('button');
+    b.className=`pin ${p.type}`+(LS.checked.has(p.id)?' done':'');
+    b.style.left=(p.x/340*100)+'%';
+    b.style.top=(p.y/540*100)+'%';
+    b.innerHTML=`<div class="ball"><span>${p.emoji}</span></div><div class="lbl">${p.name}</div>`;
+    b.onclick=()=>openPlace(p.id);
+    map.appendChild(b);
+  });
+}
+
+/* ---------- 渲染：美食 ---------- */
+function renderFoods(){
+  const box=document.getElementById('foodlist');
+  let html='',lastCat='';
+  FOODS.forEach(f=>{
+    if(f.cat!==lastCat){html+=`<div class="cat-title">${f.cat}</div>`;lastCat=f.cat;}
+    const on=LS.wish.has(f.id)?'on':'';
+    const wt=LS.wish.has(f.id)?'已想吃 ♥':'想吃';
+    html+=`<div class="food-card" onclick="toggleWish('${f.id}')">
+      <div class="em">${f.em}</div>
+      <div class="body"><div class="nm">${f.nm}</div><div class="sh">${f.sh}</div>
+      <div class="more">${f.more}</div></div>
+      <div class="wish ${on}" id="wish-${f.id}">${wt}</div></div>`;
+  });
+  box.innerHTML=html;
+}
+
+/* ---------- 渲染：我的 ---------- */
+function renderMe(){
+  const total=PLACES.length, done=LS.checked.size;
+  const pct=Math.round(done/total*100);
+  document.getElementById('ring').style.setProperty('--p',pct);
+  document.getElementById('ringNum').textContent=done;
+  document.getElementById('ringText').textContent= done===0?'还没出发，冲鸭！': done===total?'全部打卡完成 🎉':'已点亮 '+done+' 个地点';
+  document.getElementById('ringSub').textContent= done+' / '+total+' 地点 · '+LS.wish.size+' 道想吃';
+  const list=document.getElementById('checkedList');
+  if(done===0){list.innerHTML='<div style="font-size:13px;color:var(--ink-soft)">还没有打卡，去地图上点亮图钉吧 ✨</div>';}
+  else{
+    let h='';
+    PLACES.filter(p=>LS.checked.has(p.id)).forEach(p=>{h+=`<div class="ci"><span class="x">✓</span>${p.emoji} ${p.name}</div>`;});
+    list.innerHTML=h;
+  }
+  document.getElementById('notes').value=LS.notes;
+}
+
+/* ---------- 交互 ---------- */
+let curPlace=null;
+function openPlace(id){
+  const p=PLACES.find(x=>x.id===id);curPlace=p;
+  document.getElementById('shName').innerHTML=p.emoji+' '+p.name;
+  const st=document.getElementById('shType');st.textContent=TYPE_TXT[p.type];st.style.background=TYPE_COL[p.type];
+  document.getElementById('shDesc').textContent=p.desc;
+  document.getElementById('shEat').innerHTML='🍴 吃什么：'+p.eat;
+  document.getElementById('shTip').innerHTML='💡 小贴士：'+p.tip;
+  const cb=document.getElementById('shCheck');
+  if(LS.checked.has(id)){cb.textContent='取消打卡';cb.classList.add('done');}
+  else{cb.textContent='打卡 ✅';cb.classList.remove('done');}
+  document.getElementById('mask').classList.add('show');
+  document.getElementById('sheet').classList.add('show');
+}
+function closeSheet(){document.getElementById('mask').classList.remove('show');document.getElementById('sheet').classList.remove('show');}
+function toggleCheckFromSheet(){
+  if(!curPlace)return;
+  const id=curPlace.id;
+  if(LS.checked.has(id)){LS.checked.delete(id);toast('已取消打卡');}
+  else{LS.checked.add(id);toast('打卡成功 ✅ '+curPlace.name);}
+  save();renderMap();renderMe();
+  const cb=document.getElementById('shCheck');
+  if(LS.checked.has(id)){cb.textContent='取消打卡';cb.classList.add('done');}
+  else{cb.textContent='打卡 ✅';cb.classList.remove('done');}
+}
+function toggleWish(id){
+  if(LS.wish.has(id)){LS.wish.delete(id);toast('移出心愿单');}
+  else{LS.wish.add(id);toast('已加入想吃 ♥');}
+  save();renderFoods();renderMe();
+}
+function rollFood(){
+  const pool=FOODS.filter(f=>!LS.wish.has(f.id));
+  if(pool.length===0){toast('心愿单已满，随便挑一家吃吧 😋');return;}
+  const f=pool[Math.floor(Math.random()*pool.length)];
+  toast('🎲 今天吃：'+f.nm+' '+f.em);
+}
+function copyTrip(){
+  const txt=`汕头周末手账 8.22-8.23
+去程 8/22 深圳北08:29→汕头10:45
+返程 8/23 汕头21:15→深圳北23:14
+住：桔子水晶酒店(新一城黄河路)
+必吃：牛肉火锅/砂锅粥/卤鹅/生腌/肠粉/蚝烙/鸭母捻`;
+  navigator.clipboard.writeText(txt).then(()=>toast('行程已复制 📋')).catch(()=>toast('复制失败，手动选吧'));
+}
+function switchTab(t){
+  ['trip','map','food','me'].forEach(s=>{
+    document.getElementById('screen-'+s).classList.toggle('hidden',s!==t);
+  });
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  if(t==='me')renderMe();
+}
+let toastTimer;
+function toast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
+}
+document.getElementById('notes').addEventListener('input',e=>{LS.notes=e.target.value;save();});
+
+/* init */
+renderTimeline();renderMap();renderFoods();renderMe();
+</script>
+</body>
+</html>
