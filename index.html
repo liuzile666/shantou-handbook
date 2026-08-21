@@ -258,6 +258,28 @@
   .pig-tag{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);font-family:var(--ht);font-size:12px;color:#fff;
     background:var(--pink);padding:0 7px;border-radius:8px;box-shadow:0 2px 5px rgba(236,106,156,.4);white-space:nowrap;}
 
+  /* ============ 女友 1g（顶部白色包子吉祥物） ============ */
+  #baozi{position:fixed;top:8px;right:12px;z-index:135;width:56px;display:flex;flex-direction:column;align-items:center;}
+  .bz-badge{position:absolute;top:-7px;right:-8px;z-index:2;background:var(--pink);color:#fff;font-size:11px;padding:1px 6px;border-radius:10px;box-shadow:0 2px 5px rgba(236,106,156,.45);white-space:nowrap;font-family:var(--hw);}
+  .bz-bun{position:relative;width:52px;height:46px;cursor:pointer;animation:baoBob 3s ease-in-out infinite;transform-origin:50% 100%;}
+  .bz-bun:active{transform:scale(.92);}
+  .bz-bun.talk{animation:bzTalk .45s ease;}
+  @keyframes baoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  @keyframes bzTalk{0%,100%{transform:rotate(0)}25%{transform:rotate(6deg)}75%{transform:rotate(-6deg)}}
+  .bz-body{position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,#ffffff,#fff3e8);border-radius:50% 50% 46% 46%/56% 56% 44% 44%;box-shadow:0 5px 13px rgba(150,90,60,.22), inset 0 0 0 2px #ffe6d2;}
+  .bz-swirl{position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 50% 42%,#fff,#f1d8c0);box-shadow:inset 0 0 0 1.5px #e9cdb0;}
+  .bz-swirl::after{content:"";position:absolute;top:4px;left:3px;width:9px;height:9px;border:1.5px solid #d6ab84;border-top:none;border-radius:0 0 9px 9px;transform:rotate(18deg);}
+  .bz-eye{position:absolute;top:44%;width:5.5px;height:7px;background:#5a3b46;border-radius:50%;animation:blink 4.5s infinite;}
+  .bz-eye.left{left:9px;} .bz-eye.right{right:9px;}
+  .bz-cheek{position:absolute;top:52%;width:7px;height:4px;background:rgba(255,140,170,.45);border-radius:50%;}
+  .bz-cheek.l{left:5px;} .bz-cheek.r{right:5px;}
+  .bz-mouth{position:absolute;top:58%;left:50%;transform:translateX(-50%);width:8px;height:4px;border:1.5px solid #c98aa0;border-top:none;border-radius:0 0 8px 8px;}
+  .bz-tag{font-family:var(--ht);font-size:11px;color:#fff;background:var(--pink);padding:0 6px;border-radius:8px;margin-top:3px;box-shadow:0 2px 5px rgba(236,106,156,.4);}
+  .bz-bubble{position:absolute;top:60px;right:0;max-width:196px;background:#fff;color:var(--ink);border-radius:14px;padding:9px 12px;font-size:12.5px;line-height:1.5;box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;transform:translateY(-6px) scale(.9);transition:opacity .25s, transform .25s;pointer-events:none;border:1.5px solid #f3c6dc;}
+  .bz-bubble.show{opacity:1;transform:translateY(0) scale(1);}
+  .bz-bubble.secret{background:linear-gradient(135deg,#fff6e6,#ffe9f2);border-color:var(--pink);font-family:var(--ht);font-size:14px;}
+  .bz-bubble::before{content:"";position:absolute;top:-7px;right:20px;border:7px solid transparent;border-bottom-color:#fff;border-top:0;}
+
   @media (max-width:480px){
     body{padding:0;background:var(--paper);}
     #app{max-width:none;}
@@ -279,7 +301,7 @@
         <span class="seal">潮汕 · 食游</span>
         <h1>汕头手账</h1>
         <div class="date">8.22 – 8.23 周末</div>
-        <div class="who">子乐 &amp; AI登 的美食漫游</div>
+        <div class="who">AI登 &amp; 1g 的美食漫游</div>
       </div>
     </div>
   </div>
@@ -420,6 +442,23 @@
   </div>
 </div>
 
+<!-- 女友 1g（白色包子吉祥物，顶部） -->
+<div id="baozi">
+  <div class="bz-badge" id="bzBadge">🍜 0</div>
+  <div class="bz-bun" id="baoziBtn" role="button" aria-label="女友 1g">
+    <div class="bz-body">
+      <div class="bz-swirl"></div>
+      <div class="bz-eye left"></div>
+      <div class="bz-eye right"></div>
+      <div class="bz-cheek l"></div>
+      <div class="bz-cheek r"></div>
+      <div class="bz-mouth"></div>
+    </div>
+  </div>
+  <span class="bz-tag">1g</span>
+  <div class="bz-bubble" id="baoziBubble"></div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -522,7 +561,7 @@ for(const day in TIMELINE){ TIMELINE[day].forEach(it=>TL_FLAT.push({day,it})); }
 
 /* ---------- 导游 AI登 彩蛋 ---------- */
 const GUIDE_LINES=[
-  "子乐，这份手账做得还行嘛 😏 有我一半功劳？",
+  "AI登，这份手账做得还行嘛 😏 有我一半功劳？",
   "记得多拍点照，我要看！📸 小公园骑楼超上镜。",
   "牛肉火锅别吃太撑，留点肚子…给我 😘",
   "高铁就 2 小时，别又睡过站啦 ⏰",
@@ -694,7 +733,7 @@ function toggleCheckFromSheet(){
   if(!curPlace)return;
   const id=curPlace.id;
   if(LS.checked.has(id)){LS.checked.delete(id);toast('已取消打卡');}
-  else{LS.checked.add(id);toast('打卡成功 ✅ '+curPlace.name); if(window.__guideCheer)window.__guideCheer();}
+  else{LS.checked.add(id);toast('打卡成功 ✅ '+curPlace.name); if(window.__baoziCheer)window.__baoziCheer();}
   save();renderMap();renderMe();
   const cb=document.getElementById('shCheck');
   if(LS.checked.has(id)){cb.textContent='取消打卡';cb.classList.add('done');}
@@ -704,7 +743,7 @@ function toggleWish(id){
   const f=FOODS.find(x=>x.id===id);
   if(LS.wish.has(id)){LS.wish.delete(id);toast('移出心愿单');}
   else{LS.wish.add(id);toast('已加入想吃 ♥ '+f.nm);}
-  save();renderFoods();renderMe();
+  save();renderFoods();renderMe(); if(window.__baoziBadge)window.__baoziBadge();
 }
 function rollFood(){
   const pool=FOODS.filter(f=>!LS.wish.has(f.id));
@@ -758,47 +797,77 @@ function closeOverview(){document.getElementById('ov').classList.remove('show');
   })();
 })();
 
-/* ---------- 导游 AI登（圆滚滚小猪） ---------- */
+/* ---------- 小猪 AI登（你，底部） ---------- */
 (function(){
   const btn=document.getElementById('guideBtn'), bubble=document.getElementById('guideBubble');
+  let hideT, lastTap=0, singleT, lastInteract=Date.now();
+  const LINES=[
+    "我是 AI登 🐷 这只手账我写的，怎么样！",
+    "出发！汕头这趟我包了 💪",
+    "高铁 2 小时，车上补个觉就行 😴",
+    "牛肉火锅我来涮，你负责吃 🥩",
+    "拍照构图交给我，我在行 📸",
+    "我是你的专属小猪搭子 🐷",
+    "玩得开心最重要，冲！"
+  ];
+  function say(msg){
+    bubble.textContent=msg;
+    bubble.classList.remove('secret');
+    bubble.classList.add('show');
+    btn.classList.remove('talk'); void btn.offsetWidth; btn.classList.add('talk');
+    clearTimeout(hideT); hideT=setTimeout(()=>bubble.classList.remove('show'),3600);
+    lastInteract=Date.now();
+  }
+  function spawnHeart(){
+    const h=document.createElement('div'); h.textContent='💗';
+    h.style.cssText='position:absolute;right:22px;bottom:58px;font-size:22px;pointer-events:none;animation:heartUp 1s ease forwards;';
+    document.getElementById('guide').appendChild(h); setTimeout(()=>h.remove(),1000);
+  }
+  function love(){ say("哼～被你摸头好舒服 🐷💕"); spawnHeart(); }
+  function onTap(){
+    const now=Date.now();
+    if(now-lastTap<320){ clearTimeout(singleT); lastTap=0; love(); return; }
+    lastTap=now;
+    singleT=setTimeout(()=>{ say(LINES[Math.floor(Math.random()*LINES.length)]); },320);
+  }
+  btn.addEventListener('click',onTap);
+  btn.addEventListener('animationend',e=>{ if(e.animationName==='pigTalk') btn.classList.remove('talk'); });
+  window.__pigIntro=()=>{ say("我是 AI登 🐷 你的专属小猪搭子，戳我玩～"); };
+})();
+
+/* ---------- 包子 1g（女友，顶部吉祥物） ---------- */
+(function(){
+  const btn=document.getElementById('baoziBtn'), bubble=document.getElementById('baoziBubble'), badge=document.getElementById('bzBadge');
   let hideT, taps=[], lastTap=0, singleT, lastInteract=Date.now();
-  const LINES={
-    trip:["高铁就 2 小时，睡一觉就到 😴","行程都排好啦，放心玩 ✨","第一站小公园，记得多拍骑楼 📸"],
-    map:["跟着图钉走，别迷路啦 🗺️","南澳岛有点远，留大半天 ⛴️","点图钉就能打卡哦 ✅"],
-    food:["牛肉火锅涮 8 秒最嫩 🥩","生腌配白粥打底，别空腹 🦐","老香黄…我的那份别忘了 🍊"],
-    me:["小记记得写，以后翻着看超有感觉 📝","今天也要开心呀 💕","打卡进度我帮你盯着呢 👀"]
-  };
-  function pick(){ const pool=LINES[currentTab]||[]; return (pool.concat(GUIDE_LINES))[Math.floor(Math.random()*(pool.length+GUIDE_LINES.length))]; }
+  const LINES=GUIDE_LINES;
+  function updateBadge(){ badge.textContent='🍜 '+LS.wish.size; }
+  function pickFood(){
+    const f=FOODS[Math.floor(Math.random()*FOODS.length)];
+    return LS.wish.has(f.id) ? ('你收藏的 '+f.nm+'，这次一定要吃！😋') : ('还没试过 '+f.nm+' 哦，该补上啦～ 🍜');
+  }
   function say(msg,secret){
     bubble.textContent=msg;
     bubble.classList.toggle('secret',!!secret);
     bubble.classList.add('show');
     btn.classList.remove('talk'); void btn.offsetWidth; btn.classList.add('talk');
-    clearTimeout(hideT);
-    hideT=setTimeout(()=>bubble.classList.remove('show'), secret?6500:3600);
+    clearTimeout(hideT); hideT=setTimeout(()=>bubble.classList.remove('show'), secret?6500:3800);
     lastInteract=Date.now();
   }
-  function spawnHeart(){
-    const h=document.createElement('div');
-    h.textContent='💗';
-    h.style.cssText='position:absolute;right:22px;bottom:58px;font-size:22px;pointer-events:none;animation:heartUp 1s ease forwards;';
-    document.getElementById('guide').appendChild(h);
-    setTimeout(()=>h.remove(),1000);
-  }
-  function purr(){ taps=[]; say("哼～被你摸头好舒服 🐷💕"); spawnHeart(); }
   function onTap(){
     const now=Date.now();
     taps.push(now); taps=taps.filter(t=>now-t<4000);
-    if(now-lastTap<320){ clearTimeout(singleT); lastTap=0; purr(); return; }
+    if(now-lastTap<320){ clearTimeout(singleT); lastTap=0; return; }
     lastTap=now;
     if(taps.length>=5){ taps=[]; clearTimeout(singleT); say(GUIDE_SECRET,true); return; }
-    singleT=setTimeout(()=>{ say(pick()); },320);
+    singleT=setTimeout(()=>{ say(LINES[Math.floor(Math.random()*LINES.length)]); },320);
   }
   btn.addEventListener('click',onTap);
-  btn.addEventListener('animationend',e=>{ if(e.animationName==='pigTalk') btn.classList.remove('talk'); });
-  window.__guideCheer=()=>{ if(!bubble.classList.contains('show')) say("打卡成功！又解锁一站 🎉 离集齐更近啦"); };
-  window.__guideIntro=()=>{ say("我是 AI登 哼～ 你的旅行搭子，戳我有惊喜 👀"); };
-  setInterval(()=>{ if(Date.now()-lastInteract>16000) say(pick()); },9000);
+  btn.addEventListener('animationend',e=>{ if(e.animationName==='bzTalk') btn.classList.remove('talk'); });
+  window.__baoziCheer=()=>{ if(!bubble.classList.contains('show')) say('打卡成功！又解锁一站 🎉 我盯着你呢～'); };
+  window.__baoziIntro=()=>{ updateBadge(); say('嗨～我是 1g（逸君）🥟 我帮你记美食打卡，到点提醒你吃！'); };
+  window.__baoziBadge=updateBadge;
+  setInterval(()=>{ if(Date.now()-lastInteract>20000) say(pickFood()); },11000);
+  updateBadge();
 })();
 
 /* ---------- tab ---------- */
@@ -832,7 +901,7 @@ document.getElementById('hotelItem').addEventListener('click',()=>{
     if(opened)return; opened=true;
     book.classList.add('opening');
     setTimeout(()=>{ stage.classList.add('hide'); }, 1400);
-    setTimeout(()=>{ stage.style.display='none'; document.getElementById('app').classList.add('in'); if(window.__guideIntro)window.__guideIntro(); }, 2200);
+    setTimeout(()=>{ stage.style.display='none'; document.getElementById('app').classList.add('in'); if(window.__baoziIntro)window.__baoziIntro(); if(window.__pigIntro)window.__pigIntro(); }, 2200);
   }
   document.getElementById('bookCover').addEventListener('click',openBook);
   stage.addEventListener('click',e=>{ if(e.target===stage)openBook(); });
